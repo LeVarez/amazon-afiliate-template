@@ -6,11 +6,28 @@
     ref: string;
     price: number;
   }
-  import test1 from './json/products.json';
-  let test = test1;
-  export let products : Products[] = test;
+  import dogsbeds from './json/dogs/beds.json';
+  import dogsfood from './json/dogs/food.json';
 
-  let hoveringItem : number = -1;
+  let data = {
+    dogs: {
+      beds: dogsbeds,
+      food: dogsfood
+    },
+    cats: {
+
+    }
+  }
+
+  export let currentdata = "";
+
+  let products : Products[] = [];
+
+  $:{
+    let path = currentdata.split(".");
+    if(currentdata.length > 0) products = data[path[0]][path[1]];
+    console.log(products);
+  }
 
 </script>
 
@@ -19,12 +36,12 @@
 	{#each products as product, i}
   <div class="item">
     <div class="opacity">
-        <div class="buy_button">Ver en<br>Amazon</div>
+        <a class="buy_button" href={product.ref}>Comprar en<br>Amazon</a>
     </div>
     <img src={product.img} class="product_imgbox" alt={product.name}>
     <div class="product_body">
       <h3 class="product_name">{product.name}</h3>
-      <span class="product_price">{product.price}</span>
+      <span class="product_price">{product.price}€</span>
     </div>
 
 
@@ -48,9 +65,12 @@
     transform: translateY(175%);
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+    padding-bottom: 5px;
+    text-decoration: none;
   }
   .buy_button:hover{
     background-color: rgb(255, 35, 145);
+
   }
   .opacity {
     z-index: 2;
@@ -78,7 +98,8 @@
   }
   .product_imgbox{
 
-    width: auto;
+    width: 90%;
+
     height: 100px;
     display: block;
     margin: 10px auto;
@@ -86,13 +107,14 @@
   .container{
     z-index: 0;
     text-align: center;
-    width: 100%;
+    max-width: 100%;
     height: auto;
     margin: 30px auto;
-
+    padding-left: 20%;
+    padding-right: 20%;
     display: grid;
 
-    width: 65%;
+
     //Using auto-fill and auto-fit
     grid-template-rows: repeat(2, minmax(150px, min-content));
     grid-template-columns: repeat(auto-fill,100px);

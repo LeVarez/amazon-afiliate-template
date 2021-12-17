@@ -1,0 +1,35 @@
+[
+    {
+        "main" : {
+            "title" : "Perros",
+            "link" : "./"
+        },
+        "subpages" : [
+            {
+                "title" : "Camas",
+                "link" : "dogs.beds"
+            },
+            {
+                "title" : "Comida",
+                "link" : "dogs.food"
+            }
+        ]
+    },
+    {
+        "main" : {
+            "title" : "Gatos",
+            "link" : "./"
+        },
+        "subpages" : [
+        ]
+    },
+    {
+        "main" : {
+            "title" : "Aves",
+            "link" : "./"
+        },
+        "subpages" : [
+
+        ]
+    }
+]

@@ -9,92 +9,11 @@
     }
 </script>
 <script lang="ts">
+    import { bubble } from "svelte/internal";
+    import menu from './json/menu.json';
+    export let website_name : string = "TopMascotas";
 
-
-    let menu = [
-        {
-            main : {
-                title : "Perros",
-                link : "./"
-            },
-            subpages : [
-                {
-                    title : "Camas",
-                    link : "./"
-                },
-                {
-                    title : "Juguetes",
-                    link : "./"
-                },
-                {
-                    title : "Comida",
-                    link : "./"
-                },
-            ]
-        },
-        {
-            main : {
-                title : "Gatos",
-                link : "./"
-            },
-            subpages : [
-                {
-                    title : "Camas",
-                    link : "./"
-                },
-                {
-                    title : "Juguetes",
-                    link : "./"
-                },
-                {
-                    title : "Comida",
-                    link : "./"
-                },
-            ]
-        },
-        {
-            main : {
-                title : "Aves",
-                link : "./"
-            },
-            subpages : [
-                {
-                    title : "Camas",
-                    link : "./"
-                },
-                {
-                    title : "Juguetes",
-                    link : "./"
-                },
-                {
-                    title : "Comida",
-                    link : "./"
-                },
-            ]
-        },
-        {
-            main : {
-                title : "Roedores",
-                link : "./"
-            },
-            subpages : [
-                {
-                    title : "Camas",
-                    link : "./"
-                },
-                {
-                    title : "Juguetes",
-                    link : "./"
-                },
-                {
-                    title : "Comida",
-                    link : "./"
-                },
-            ]
-        }
-    ]
-    export let website_name : string = "TopMascotas"
-    export let options : MenuOptions[] = menu;
+    let options : MenuOptions[] = menu;
 
     let menuVisible = true;
 
@@ -107,7 +26,12 @@
     $: {
         if (innerWidth <= 768) menuVisible = false;
         else menuVisible = true;
+
     }
+
+    export let currentdata = "";
+
+
 
 </script>
 <svelte:window bind:innerWidth={innerWidth}/>
@@ -118,20 +42,23 @@
         <div class="logo">
             <i class="fab fa-sass">{website_name}</i>
         </div>
-        <button class="btn" id="nav-toggle" on:click={toggleMenu}>
+        <div class="btn" id="nav-toggle" on:click={toggleMenu}>
                 <div class="menu_line"></div>
                 <div class="menu_line"></div>
                 <div class="menu_line"></div>
+        </div>
         </li>
         {#if menuVisible}
         {#each options as option}
-        <li class="nav-link">{option.main.title}<i class="fa fa-chevron-up"></i>
+        <div class="nav-link">{option.main.title}<div class="fa fa-chevron-up"></div>
+            {#if option.subpages.length > 0}
             <ul class="nav-drop">
                 {#each option.subpages as subapage}
-                <li>{subapage.title}</li>
+                <div class="menu_subitem" on:click={() => {currentdata = subapage.link}}>{subapage.title}</div>
                 {/each}
             </ul>
-        </li>
+            {/if}
+        </div>
         {/each}
         {/if}
 
@@ -172,8 +99,8 @@
     }
 
     ul,
-    li {
-    list-style: none;
+    li , .menu_subitem {
+        list-style: none;
     }
 
     nav {
@@ -188,14 +115,13 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        gap: 2rem;
         .nav-logo {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-right: auto;
         .logo {
-            font-size: 2.5rem;
+            font-size: calc(1em + 1vw);
             cursor: pointer;
             transition: color 0.2s;
             &:hover,
@@ -214,6 +140,7 @@
         font-weight: bold;
         padding: 1.5rem 1.8rem;
         position: relative;
+        margin-left: 10px;
         cursor: pointer;
         i {
             position: absolute;
@@ -262,7 +189,7 @@
             opacity: 0;
             visibility: hidden;
             transition: 300ms ease-out;
-            li {
+            .menu_subitem {
             padding: 0.5rem 1rem;
             border-radius: 4px;
             cursor: pointer;
@@ -277,6 +204,7 @@
         }
     }
     .btn {
+        margin-left: 30px;
         border: none;
         outline: transparent;
         padding: 0.5rem 1rem;
@@ -323,6 +251,18 @@
 
     // hide nav link and items below break point and show toggle btn
     @media screen and(max-width: $break-point) {
+    .container {
+        padding: 0;
+    }
+    .btn{
+        margin-right: 10px;
+        position: absolute;
+        display: block;
+        right: 0;
+    }
+    .logo{
+        margin-left: 10px;
+    }
     nav {
         padding: 1rem 0;
         .nav-list {
@@ -330,6 +270,9 @@
         .nav-logo {
             #nav-toggle {
             display: block;
+            }
+            .logo{
+                font-size: 1.5rem;
             }
         }
         .nav-link {
