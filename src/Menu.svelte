@@ -9,9 +9,11 @@
     }
 </script>
 <script lang="ts">
-    import { bubble } from "svelte/internal";
     import menu from './json/menu.json';
+
     export let website_name : string = "TopMascotas";
+
+    export let selectedOption :  string = "";
 
     let options : MenuOptions[] = menu;
 
@@ -23,15 +25,14 @@
         menuVisible = !menuVisible;
     }
 
+    let reload = (link : string) => {
+        if (window.location.pathname+window.location.search === link) location.reload();
+    }
+
     $: {
         if (innerWidth <= 768) menuVisible = false;
         else menuVisible = true;
-
     }
-
-    export let currentdata = "";
-
-
 
 </script>
 <svelte:window bind:innerWidth={innerWidth}/>
@@ -40,7 +41,7 @@
     <ul class="nav-list">
         <li class="nav-logo">
         <div class="logo">
-            <i class="fab fa-sass">{website_name}</i>
+            <i class="fab fa-sass" href="/"><a style="all:unset;" href="/">{website_name}</a></i>
         </div>
         <div class="btn" id="nav-toggle" on:click={toggleMenu}>
                 <div class="menu_line"></div>
@@ -50,11 +51,11 @@
         </li>
         {#if menuVisible}
         {#each options as option}
-        <div class="nav-link">{option.main.title}<div class="fa fa-chevron-up"></div>
+        <div class="nav-link {selectedOption === option.main.title? "selectedItem" : ""}" style="">{option.main.title}<div class="fa fa-chevron-up"></div>
             {#if option.subpages.length > 0}
             <ul class="nav-drop">
-                {#each option.subpages as subapage}
-                <div class="menu_subitem" on:click={() => {currentdata = subapage.link}}>{subapage.title}</div>
+                {#each option.subpages as subpage}
+                <a class="menu_subitem" href="{subpage.link}" on:click="{() => {reload(subpage.link)}}">{subpage.title}</a>
                 {/each}
             </ul>
             {/if}
@@ -70,6 +71,7 @@
 
     $menu-color-light: rgba(hotpink, 0.2);
     $menu-color: hotpink;
+    $menu-color-selected: rgb(192, 20, 106);
     $shadow-color: #e1e5ee;
     $text-color: black;
     $break-point: 768px;
@@ -82,6 +84,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    }
+    .selectedItem{
+        color: $menu-color-selected;
+        text-shadow: 0px 0px 16px #42053f;
     }
     .menu_line{
         display: block;
@@ -100,7 +106,9 @@
 
     ul,
     li , .menu_subitem {
+        text-decoration: none;
         list-style: none;
+        text-shadow: none;
     }
 
     nav {
@@ -216,10 +224,6 @@
         font-weight: bold;
         cursor: pointer;
         transition: 0.1s;
-        .outline {
-        background: inherit;
-        border: 2px solid lighten($menu-color, 25);
-        }
         &:hover {
         background: lighten($menu-color, 15);
         }
@@ -239,9 +243,6 @@
     @media screen and(min-width: $break-point) {
     nav {
         .nav-list {
-        .nav-item {
-            display: flex !important;
-        }
         .nav-link {
             display: flex !important;
         }

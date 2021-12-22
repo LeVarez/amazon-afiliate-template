@@ -1,33 +1,15 @@
-<script lang="ts">
-
-  interface Products{
+<script context="module" lang="ts">
+  export interface Product {
     name: string;
     img: string;
     ref: string;
     price: number;
   }
-  import dogsbeds from './json/dogs/beds.json';
-  import dogsfood from './json/dogs/food.json';
+</script>
 
-  let data = {
-    dogs: {
-      beds: dogsbeds,
-      food: dogsfood
-    },
-    cats: {
+<script lang="ts">
 
-    }
-  }
-
-  export let currentdata = "";
-
-  let products : Products[] = [];
-
-  $:{
-    let path = currentdata.split(".");
-    if(currentdata.length > 0) products = data[path[0]][path[1]];
-    console.log(products);
-  }
+  export let products : Product[] = [];
 
 </script>
 
@@ -97,9 +79,8 @@
     margin: 0 auto 0 auto;
   }
   .product_imgbox{
-
-    width: 90%;
-
+    width: auto;
+    max-width: 90%;
     height: 100px;
     display: block;
     margin: 10px auto;

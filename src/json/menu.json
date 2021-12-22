@@ -7,11 +7,19 @@
         "subpages" : [
             {
                 "title" : "Camas",
-                "link" : "dogs.beds"
+                "link" : "/dogs/beds"
             },
             {
                 "title" : "Comida",
-                "link" : "dogs.food"
+                "link" : "/dogs/food"
+            },
+            {
+                "title" : "Juguetes",
+                "link" : "/dogs/toys"
+            },
+            {
+                "title" : "Correas",
+                "link" : "/dogs/leash"
             }
         ]
     },

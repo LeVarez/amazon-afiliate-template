@@ -1,0 +1,37 @@
+[{
+    "name": "Hecha de Algodón y Cuerda de Nylon",
+    "img":  "https://m.media-amazon.com/images/I/718fFk7RdBL._AC_SL1200_.jpg",
+    "ref": "https://amzn.to/3sdS56Z",
+    "price": 22.99
+  },
+  {
+    "name": "FONPOO Juguetes Perro",
+    "img":  "https://m.media-amazon.com/images/I/71xPy9qVn8L._AC_SL1200_.jpg",
+    "ref": "https://amzn.to/3p43gNy",
+    "price": 19.99
+  },
+  {
+    "name": "YTK Juguete para perros con ventosa",
+    "img":  "https://m.media-amazon.com/images/I/61cYglBjAeL._AC_SL1500_.jpg",
+    "ref": "https://amzn.to/3mdOKRL",
+    "price": 18.99
+  },
+  {
+    "name": "WeFine Juguetes para Perros",
+    "img":  "https://m.media-amazon.com/images/I/61CMYjFxkfL._AC_SL1000_.jpg",
+    "ref": "https://amzn.to/3IWsUM5",
+    "price": 16.49
+  },
+  {
+    "name": "HoneyGuaridan Juguetes para Perros",
+    "img":  "https://m.media-amazon.com/images/I/71nejlZfwKL._AC_SL1489_.jpg",
+    "ref": "https://amzn.to/3sgAo6Y",
+    "price": 16.99
+  },
+  {
+    "name": "Trixie Dog Activity Juego Interactivo",
+    "img":  "https://m.media-amazon.com/images/I/610nzVNbB0L._AC_SL1500_.jpg",
+    "ref": "https://amzn.to/3GTo0O9",
+    "price": 17.35
+  }
+]
