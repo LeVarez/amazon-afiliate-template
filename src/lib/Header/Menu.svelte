@@ -9,8 +9,7 @@
     }
 </script>
 <script lang="ts">
-    import menu from './json/menu.json';
-    import { link } from 'svelte-routing';
+    import menu from '../../json/menu.json';
 
     export let website_name : string = "TopMascotas";
 
@@ -37,6 +36,8 @@
 
 </script>
 <svelte:window bind:innerWidth={innerWidth}/>
+
+
 <nav>
     <div class="container">
     <ul class="nav-list">
@@ -50,25 +51,23 @@
                 <div class="menu_line"></div>
         </div>
         </li>
-        {#if menuVisible}
+
         {#each options as option}
-        <div class="nav-link {selectedOption === option.main.title? "selectedItem" : ""}" style="">{option.main.title}<div class="fa fa-chevron-up"></div>
+        <div class="nav-link {selectedOption === option.main.title? "selectedItem" : ""}" style="display: {menuVisible? "block" : "none"};">{option.main.title}<div class="fa fa-chevron-up"></div>
             {#if option.subpages.length > 0}
             <ul class="nav-drop">
                 {#each option.subpages as subpage}
                 <!--<a class="menu_subitem" href="{subpage.link}" on:click="{() => {reload(subpage.link)}}">
                     {subpage.title}
                 </a>-->
-                <a class="menu_subitem" href="{subpage.link}" use:link>
-                    {subpage.title}
-                </a>
+                <a sveltekit:prefetch class="menu_subitem" href="{subpage.link}">{subpage.title}</a>
 
                 {/each}
             </ul>
             {/if}
         </div>
         {/each}
-        {/if}
+
 
     </ul>
     </div>

@@ -1,28 +1,7 @@
 <script lang="ts">
 import { MetaTags, JsonLd } from 'svelte-meta-tags';
-import router from 'page';
 
-//Include our routes
-import HomePage from "./routes/HomePage.svelte";
-import DogBeds from './routes/productsPages/dogs/DogBeds.svelte';
-import DogsFood from './routes/productsPages/dogs/DogsFood.svelte';
-import DogsToys from './routes/productsPages/dogs/DogsToys.svelte';
-import DogsLeash from './routes/productsPages/dogs/DogsLeash.svelte';
-
-let page;
-let params;
-
-// Set up the pages to watch for
-router('/', () => (page = HomePage))
-router('/dogs/beds', () => (page = DogBeds))
-router('/dogs/food', () => (page = DogsFood))
-router('/dogs/toys', () => (page = DogsToys))
-router('/dogs/leash', () => (page = DogsLeash))
-
-// Set up the router to start and actively watch for changes
-router.start()
-
-
+import {Router, Link, Route} from 'svelte-routing';
 </script>
 
 
@@ -70,4 +49,4 @@ schema={{
 }}
 />
 
-<svelte:component this="{page}" params="{params}" />
+<Router>
